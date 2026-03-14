@@ -3,6 +3,8 @@
   "productName": "8bMzMKR",
   "version": "0.1.0",
   "description": "8bMzMKR chiptune music editor — Electron + React + TypeScript",
+  "author": "obskera",
+  "license": "SEE LICENSE IN LICENSE",
   "main": "./out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
@@ -37,5 +39,40 @@
     "electron-vite": "^3.0.0",
     "typescript": "^5.7.3",
     "vite": "^6.1.1"
+  },
+  "build": {
+    "appId": "com.obskera.8bmzmkr",
+    "productName": "8bMzMKR",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "out/**",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "build/icons/icon.icns",
+      "category": "public.app-category.music",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "build/icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
