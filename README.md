@@ -5,13 +5,13 @@
 ## Run Locally
 
 1. Install dependencies:
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 2. Start development mode:
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
 ## Build Desktop Apps
 
@@ -20,24 +20,33 @@ Compiled app artifacts are written to the `dist/` directory.
 ### macOS
 
 1. Build and package for macOS:
-   ```bash
-   npm run dist:mac
-   ```
+    ```bash
+    npm run dist:mac
+    ```
 2. Output typically includes a `.dmg` and/or `.zip` depending on target defaults.
+3. If a macOS signing identity is installed in your keychain, `electron-builder` may auto-sign this build.
+4. For an unsigned local test build, use:
+    ```bash
+    npm run dist:mac:unsigned
+    ```
+5. If signed builds fail with `resource fork, Finder information, or similar detritus not allowed`, build to `/tmp` (outside Desktop/iCloud-managed paths):
+    ```bash
+    npm run dist:mac:signed:tmp
+    ```
 
 ### Windows
 
 1. Build and package for Windows:
-   ```bash
-   npm run dist:win
-   ```
+    ```bash
+    npm run dist:win
+    ```
 2. Output typically includes an `.exe` installer and/or unpacked app depending on target defaults.
 
 ## Cross-Platform Build Notes
 
 - Best practice is to build on the target OS:
-  - Build macOS artifacts on macOS
-  - Build Windows artifacts on Windows
+    - Build macOS artifacts on macOS
+    - Build Windows artifacts on Windows
 - Cross-building can work in some setups, but signing, native dependencies, and installer tooling can fail depending on environment.
 
 ## Generic Packaging Command
@@ -56,6 +65,26 @@ Unsigned builds are fine for local testing. For public distribution:
 - Windows: configure Authenticode code signing.
 
 Without signing, users may see security warnings during installation.
+
+On macOS, `electron-builder` can automatically detect a signing identity from your keychain. If you want to skip signing for a local build, run `npm run dist:mac:unsigned`.
+
+If macOS keeps prompting for your keychain password during signing, that is usually Keychain Access blocking repeated `codesign` operations. For local testing, use `npm run dist:mac:unsigned`. For signed builds, update the Access Control settings for your Apple Developer private key in Keychain Access so `codesign` is allowed.
+
+One-time terminal fix for repeated `codesign` prompts on macOS:
+
+```bash
+security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "<your-mac-login-password>" ~/Library/Keychains/login.keychain-db
+```
+
+Then rerun:
+
+```bash
+npm run dist:mac
+```
+
+If you prefer the GUI path, open Keychain Access, find the private key attached to your `Developer ID Application` certificate, open `Get Info`, then update `Access Control` so `codesign` is allowed without prompting every time.
+
+If your repository is under Desktop or another iCloud-managed location, macOS can add `FinderInfo`/`fileprovider` metadata to generated `.app` directories and break `codesign`. In that case, use `npm run dist:mac:signed:tmp` or move the repo to a non-iCloud path like `~/Developer`.
 
 ## License
 
