@@ -50,38 +50,40 @@ const LOCAL_WIND_FILES: Record<'flute' | 'ocarina' | 'harmonica', string[]> = {
   harmonica: ['C3.mp3', 'D3.mp3', 'E3.mp3', 'G3.mp3', 'A3.mp3', 'C4.mp3', 'D4.mp3', 'E4.mp3', 'G4.mp3', 'A4.mp3', 'C5.mp3']
 }
 
+const BASE = import.meta.env.BASE_URL ?? '/'
+
 function buildRequiredSamplePaths(): string[] {
   const paths: string[] = []
 
   for (const file of LOCAL_PIANO_FILES) {
-    paths.push(`/samples/piano/${file}`)
+    paths.push(`${BASE}samples/piano/${file}`)
   }
 
   for (const file of LOCAL_HURDY_GURDY_FILES) {
-    paths.push(`/samples/hurdy-gurdy/${file}`)
+    paths.push(`${BASE}samples/hurdy-gurdy/${file}`)
   }
 
   for (const file of LOCAL_GUITAR_FILES) {
-    paths.push(`/samples/guitar/${file}`)
+    paths.push(`${BASE}samples/guitar/${file}`)
   }
 
   for (const file of LOCAL_ELECTRIC_GUITAR_FILES) {
-    paths.push(`/samples/electric-guitar/${file}`)
+    paths.push(`${BASE}samples/electric-guitar/${file}`)
   }
 
   for (const file of LOCAL_DRUM_FILES) {
-    paths.push(`/samples/drums/${file}`)
+    paths.push(`${BASE}samples/drums/${file}`)
   }
 
   for (const instrument of Object.keys(LOCAL_STRING_FILES) as Array<keyof typeof LOCAL_STRING_FILES>) {
     for (const file of LOCAL_STRING_FILES[instrument]) {
-      paths.push(`/samples/strings/${instrument}/${file}`)
+      paths.push(`${BASE}samples/strings/${instrument}/${file}`)
     }
   }
 
   for (const instrument of Object.keys(LOCAL_WIND_FILES) as Array<keyof typeof LOCAL_WIND_FILES>) {
     for (const file of LOCAL_WIND_FILES[instrument]) {
-      paths.push(`/samples/winds/${instrument}/${file}`)
+      paths.push(`${BASE}samples/winds/${instrument}/${file}`)
     }
   }
 

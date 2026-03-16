@@ -1,8 +1,9 @@
 import type { InstrumentType, Song } from '../types/song'
 
+const BASE = import.meta.env.BASE_URL ?? '/'
 const SAMPLE_RATE = 44100
 const BEATS_PER_MEASURE = 4
-const GRAND_PIANO_SAMPLE_BASE_URL = '/samples/piano/'
+const GRAND_PIANO_SAMPLE_BASE_URL = `${BASE}samples/piano/`
 const GRAND_PIANO_SAMPLE_URLS: Record<string, string> = {
   A0: 'A0.mp3',
   C1: 'C1.mp3',
@@ -35,7 +36,7 @@ const GRAND_PIANO_SAMPLE_URLS: Record<string, string> = {
   A7: 'A7.mp3',
   C8: 'C8.mp3'
 }
-const HURDY_GURDY_SAMPLE_BASE_URL = '/samples/hurdy-gurdy/'
+const HURDY_GURDY_SAMPLE_BASE_URL = `${BASE}samples/hurdy-gurdy/`
 const HURDY_GURDY_SAMPLE_URLS: Record<string, string> = {
   C3: 'C3.wav',
   G3: 'G3.wav',
@@ -43,7 +44,7 @@ const HURDY_GURDY_SAMPLE_URLS: Record<string, string> = {
   G4: 'G4.wav',
   C5: 'C5.wav'
 }
-const GUITAR_SAMPLE_BASE_URL = '/samples/guitar/'
+const GUITAR_SAMPLE_BASE_URL = `${BASE}samples/guitar/`
 const GUITAR_SAMPLE_URLS: Record<string, string> = {
   A2: 'A2.mp3',
   C3: 'C3.mp3',
@@ -54,7 +55,7 @@ const GUITAR_SAMPLE_URLS: Record<string, string> = {
   E4: 'E4.mp3',
   G4: 'G4.mp3'
 }
-const ELECTRIC_GUITAR_SAMPLE_BASE_URL = '/samples/electric-guitar/'
+const ELECTRIC_GUITAR_SAMPLE_BASE_URL = `${BASE}samples/electric-guitar/`
 const ELECTRIC_GUITAR_SAMPLE_URLS: Record<string, string> = {
   A2: 'A2.mp3',
   C3: 'C3.mp3',
@@ -65,7 +66,7 @@ const ELECTRIC_GUITAR_SAMPLE_URLS: Record<string, string> = {
   E4: 'E4.mp3',
   G4: 'G4.mp3'
 }
-const DRUM_SAMPLE_BASE_URL = '/samples/drums/'
+const DRUM_SAMPLE_BASE_URL = `${BASE}samples/drums/`
 const DRUM_SAMPLE_URLS: Record<string, string> = {
   B1: 'B1.mp3',
   C2: 'C2.mp3',
@@ -78,15 +79,15 @@ const DRUM_SAMPLE_URLS: Record<string, string> = {
   C3: 'C3.mp3'
 }
 const STRING_SAMPLE_BASE_URLS: Record<'violin' | 'viola' | 'cello' | 'bass', string> = {
-  violin: '/samples/strings/violin/',
-  viola: '/samples/strings/viola/',
-  cello: '/samples/strings/cello/',
-  bass: '/samples/strings/bass/'
+  violin: `${BASE}samples/strings/violin/`,
+  viola: `${BASE}samples/strings/viola/`,
+  cello: `${BASE}samples/strings/cello/`,
+  bass: `${BASE}samples/strings/bass/`
 }
 const WIND_SAMPLE_BASE_URLS: Record<'flute' | 'ocarina' | 'harmonica', string> = {
-  flute: '/samples/winds/flute/',
-  ocarina: '/samples/winds/ocarina/',
-  harmonica: '/samples/winds/harmonica/'
+  flute: `${BASE}samples/winds/flute/`,
+  ocarina: `${BASE}samples/winds/ocarina/`,
+  harmonica: `${BASE}samples/winds/harmonica/`
 }
 const STRING_SAMPLE_URLS: Record<'violin' | 'viola' | 'cello' | 'bass', Record<string, string>> = {
   violin: {

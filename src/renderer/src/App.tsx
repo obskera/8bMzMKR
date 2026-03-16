@@ -272,6 +272,7 @@ export default function App(): React.JSX.Element {
               <span className="onboarding-pill">Use M/S/Volume to balance tracks before editing</span>
               <span className="onboarding-pill">Open Manual Editor only when you want note-level changes</span>
               <span className="onboarding-pill">Space starts and stops playback</span>
+              {!isElectron && <span className="onboarding-pill">Web version: only WAV export is supported</span>}
             </div>
             <button className="dismiss-onboarding" onClick={() => setShowOnboarding(false)}>
               Hide tips

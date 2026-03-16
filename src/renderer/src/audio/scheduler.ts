@@ -7,6 +7,8 @@ import * as Tone from 'tone'
 import type { MutableRefObject } from 'react'
 import type { InstrumentType, Song } from '../types/song'
 
+const BASE = import.meta.env.BASE_URL ?? '/'
+
 export type StepCallback = (step: number) => void
 
 interface PlaybackOptions {
@@ -291,37 +293,37 @@ function buildSynths(song: Song): void {
       if (realInstrument === 'piano') {
         synth = new Tone.Sampler({
           urls: GRAND_PIANO_SAMPLE_URLS,
-          baseUrl: '/samples/piano/'
+          baseUrl: `${BASE}samples/piano/`
         }).toDestination()
       } else if (realInstrument === 'guitar') {
         synth = new Tone.Sampler({
           urls: GUITAR_SAMPLE_URLS,
-          baseUrl: '/samples/guitar/'
+          baseUrl: `${BASE}samples/guitar/`
         }).toDestination()
       } else if (realInstrument === 'electric-guitar') {
         synth = new Tone.Sampler({
           urls: ELECTRIC_GUITAR_SAMPLE_URLS,
-          baseUrl: '/samples/electric-guitar/'
+          baseUrl: `${BASE}samples/electric-guitar/`
         }).toDestination()
       } else if (realInstrument === 'drums') {
         synth = new Tone.Sampler({
           urls: DRUM_SAMPLE_URLS,
-          baseUrl: '/samples/drums/'
+          baseUrl: `${BASE}samples/drums/`
         }).toDestination()
       } else if (realInstrument === 'hurdy-gurdy') {
         synth = new Tone.Sampler({
           urls: HURDY_GURDY_SAMPLE_URLS,
-          baseUrl: '/samples/hurdy-gurdy/'
+          baseUrl: `${BASE}samples/hurdy-gurdy/`
         }).toDestination()
       } else if (isStringSampleInstrument(realInstrument)) {
         synth = new Tone.Sampler({
           urls: STRING_SAMPLE_URLS[realInstrument],
-          baseUrl: `/samples/strings/${realInstrument}/`
+          baseUrl: `${BASE}samples/strings/${realInstrument}/`
         }).toDestination()
       } else {
         synth = new Tone.Sampler({
           urls: WIND_SAMPLE_URLS[realInstrument],
-          baseUrl: `/samples/winds/${realInstrument}/`
+          baseUrl: `${BASE}samples/winds/${realInstrument}/`
         }).toDestination()
       }
 
