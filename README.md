@@ -13,6 +13,42 @@
     npm run dev
     ```
 
+## Generate Local Wind Samples
+
+Wind instruments (flute, ocarina, harmonica) use local WAV banks generated in-repo.
+
+```bash
+npm run gen:samples:wind
+```
+
+## Music Usage License Requirement
+
+If you plan to use generated music outside local testing (for example in games, videos, streams, client work, or commercial releases), you must generate and include a license/attribution text file.
+
+Required workflow:
+
+1. In the app, click `Export License` after exporting audio.
+2. Include the exported license text file with your distributed music/project files.
+3. If your project uses any CC-BY source material, make sure the attribution text is complete and accurate before distribution.
+
+Treat this step as mandatory for public or commercial use.
+
+## Bundled Sample Attribution
+
+This project includes locally bundled instrument samples for real playback/export.
+
+- FluidR3_GM soundfont derived samples are used for bundled piano, acoustic guitar, electric guitar, and drum kit assets.
+- FluidR3_GM is identified by the upstream source as licensed under CC BY 3.0.
+- Distribution of builds or exported works that include these assets requires attribution.
+
+Minimum compliance steps:
+
+1. Preserve this attribution information in your project or distribution materials.
+2. Use the app's exported license/attribution text when distributing generated music.
+3. Do not remove attribution notices from the sample folders.
+
+Sample folder README files under [src/renderer/public/samples](src/renderer/public/samples) document the bundled source and attribution requirement.
+
 ## Build Desktop Apps
 
 Compiled app artifacts are written to the `dist/` directory.

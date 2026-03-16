@@ -3,6 +3,7 @@ import type { Envelope, NoiseType, Track, InstrumentType } from '../types/song'
 
 interface TrackEditorProps {
   track: Track
+  instrumentOptions: Array<{ value: InstrumentType; label: string }>
   onInstrumentChange: (instrument: InstrumentType) => void
   onNoiseTypeChange: (noiseType: NoiseType) => void
   onEnvelopeChange: (field: keyof Envelope, value: number) => void
@@ -17,6 +18,7 @@ const envelopeFields: Array<{ key: keyof Envelope; label: string; min: number; m
 
 export default function TrackEditor({
   track,
+  instrumentOptions,
   onInstrumentChange,
   onNoiseTypeChange,
   onEnvelopeChange
@@ -26,10 +28,11 @@ export default function TrackEditor({
       <label className="track-editor-field">
         <span>Wave</span>
         <select value={track.instrument} onChange={(event) => onInstrumentChange(event.target.value as InstrumentType)}>
-          <option value="square">Square</option>
-          <option value="triangle">Triangle</option>
-          <option value="sawtooth">Saw</option>
-          <option value="noise">Noise</option>
+          {instrumentOptions.map((instrument) => (
+            <option key={instrument.value} value={instrument.value}>
+              {instrument.label}
+            </option>
+          ))}
         </select>
       </label>
 

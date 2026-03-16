@@ -16,7 +16,9 @@
         "dist:win": "npm run build && electron-builder --win",
         "preview": "electron-vite preview",
         "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
-        "lint": "eslint src --ext .ts,.tsx"
+        "lint": "eslint src --ext .ts,.tsx",
+        "build:web": "vite build --config vite.web.config.ts",
+        "preview:web": "vite preview --config vite.web.config.ts"
     },
     "dependencies": {
         "@electron-toolkit/preload": "^3.0.2",

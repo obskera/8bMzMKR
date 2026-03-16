@@ -6,6 +6,7 @@ declare global {
       openProject: () => Promise<Song | null>
       saveProject: (song: Song) => Promise<boolean>
       exportAudio: (format: AudioExportFormat, audioData: Uint8Array) => Promise<boolean>
+      exportCc0License: () => Promise<boolean>
     }
   }
 }

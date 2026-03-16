@@ -6,7 +6,8 @@ const api = {
   openProject: (): Promise<Song | null> => ipcRenderer.invoke('project:open'),
   saveProject: (song: Song): Promise<boolean> => ipcRenderer.invoke('project:save', song),
   exportAudio: (format: AudioExportFormat, audioData: Uint8Array): Promise<boolean> =>
-    ipcRenderer.invoke('project:export-audio', { format, audioData })
+    ipcRenderer.invoke('project:export-audio', { format, audioData }),
+  exportCc0License: (): Promise<boolean> => ipcRenderer.invoke('project:export-cc0-license')
 }
 
 if (process.contextIsolated) {

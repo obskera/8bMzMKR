@@ -1,6 +1,29 @@
 import { z } from 'zod'
 
-export const InstrumentTypeSchema = z.enum(['square', 'triangle', 'sawtooth', 'noise'])
+export const InstrumentTypeSchema = z.enum([
+  'square',
+  'triangle',
+  'sawtooth',
+  'noise',
+  'fm',
+  'am',
+  'duo',
+  'pluck',
+  'guitar',
+  'electric-guitar',
+  'hurdy-gurdy',
+  'violin',
+  'viola',
+  'cello',
+  'bass',
+  'flute',
+  'ocarina',
+  'harmonica',
+  'piano',
+  'drums',
+  'membrane',
+  'metal'
+])
 export type InstrumentType = z.infer<typeof InstrumentTypeSchema>
 
 export const EnvelopeSchema = z.object({
@@ -13,6 +36,9 @@ export type Envelope = z.infer<typeof EnvelopeSchema>
 
 export const NoiseTypeSchema = z.enum(['white', 'pink', 'brown'])
 export type NoiseType = z.infer<typeof NoiseTypeSchema>
+
+export const TrackSoundSourceSchema = z.enum(['synth', 'real'])
+export type TrackSoundSource = z.infer<typeof TrackSoundSourceSchema>
 
 export const InstrumentSettingsSchema = z.object({
   envelope: EnvelopeSchema.default({
@@ -29,6 +55,7 @@ export const TrackSchema = z.object({
   id: z.string(),
   name: z.string(),
   instrument: InstrumentTypeSchema,
+  soundSource: TrackSoundSourceSchema.default('synth'),
   settings: InstrumentSettingsSchema.default({
     envelope: {
       attack: 0.001,
@@ -57,7 +84,9 @@ export type NoteCell = z.infer<typeof NoteCellSchema>
 export const SongSchema = z.object({
   version: z.literal(1),
   bpm: z.number().min(40).max(300),
-  stepCount: z.number().int().min(4).max(256),
+  barCount: z.number().int().min(1).max(16).default(4),
+  stepCount: z.number().int().min(4).max(1024),
+  lastGenerationSeed: z.string().nullable().default(null),
   tracks: z.array(TrackSchema),
   grid: z.record(z.string(), z.array(NoteCellSchema))
 })

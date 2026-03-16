@@ -1,14 +1,15 @@
 import React from 'react'
-import { useProjectStore } from '../store/useProjectStore'
 import type { AudioExportFormat } from '../types/song'
 
 interface TransportProps {
   isPlaying: boolean
   onPlayStop: () => void
+  onPreviewLoop: () => void
   onNewProject: () => void
   onOpenProject: () => void
   onSaveProject: () => void
   onExportAudio: (format: AudioExportFormat) => void
+  onExportCc0License: () => void
   onUndo: () => void
   onRedo: () => void
   busy: boolean
@@ -19,17 +20,18 @@ interface TransportProps {
 export default function Transport({
   isPlaying,
   onPlayStop,
+  onPreviewLoop,
   onNewProject,
   onOpenProject,
   onSaveProject,
   onExportAudio,
+  onExportCc0License,
   onUndo,
   onRedo,
   busy,
   canUndo,
   canRedo
 }: TransportProps): React.JSX.Element {
-  const { song, setBpm } = useProjectStore()
   const [exportFormat, setExportFormat] = React.useState<AudioExportFormat>('wav')
 
   return (
@@ -58,6 +60,9 @@ export default function Transport({
         <button className="secondary-btn" onClick={() => onExportAudio(exportFormat)} disabled={busy}>
           Export
         </button>
+        <button className="secondary-btn" onClick={onExportCc0License} disabled={busy}>
+          Export License
+        </button>
         <button className="secondary-btn" onClick={onUndo} disabled={busy || !canUndo}>
           Undo
         </button>
@@ -75,16 +80,9 @@ export default function Transport({
         {isPlaying ? '■' : '▶'}
       </button>
 
-      <label className="bpm-control">
-        <span>BPM</span>
-        <input
-          type="number"
-          min={40}
-          max={300}
-          value={song.bpm}
-          onChange={(e) => setBpm(Math.max(40, Math.min(300, Number(e.target.value))))}
-        />
-      </label>
+      <button className="secondary-btn" onClick={onPreviewLoop} disabled={busy} aria-label="Preview loop seam">
+        Preview Loop
+      </button>
     </div>
   )
 }

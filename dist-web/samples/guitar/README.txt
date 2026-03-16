@@ -1,0 +1,18 @@
+Acoustic guitar sample files expected by the editor (required for Real mode):
+
+- A2.mp3
+- C3.mp3
+- E3.mp3
+- G3.mp3
+- A3.mp3
+- C4.mp3
+- E4.mp3
+- G4.mp3
+
+Place files with these exact names in this folder.
+
+Bundled source attribution:
+
+- Source: FluidR3_GM acoustic_guitar_nylon samples via MIDI.js soundfont distribution
+- Upstream project metadata identifies FluidR3_GM as CC BY 3.0
+- Attribution must be preserved when redistributing builds or generated works that include these assets

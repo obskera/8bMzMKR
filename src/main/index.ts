@@ -113,6 +113,50 @@ async function exportAudioFile(payload: unknown): Promise<boolean> {
   }
 }
 
+async function exportCc0LicenseFile(): Promise<boolean> {
+  if (!mainWindow) return false
+
+  const content = [
+    '8bMzMKR Audio License and Attribution Notice',
+    '',
+    'Include this file when distributing generated music that uses bundled sample libraries.',
+    '',
+    'Project-generated sample sets',
+    '- Hurdy-gurdy, strings, and winds in this project are locally generated for offline use.',
+    '',
+    'Third-party sample library used by this project',
+    '- Salamander Grand Piano samples (subset used for local piano playback/export)',
+    '  Author: Alexander Holm',
+    '  Source: https://archive.org/details/SalamanderGrandPianoV3',
+    '  License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)',
+    '  License URL: https://creativecommons.org/licenses/by/3.0/',
+    '',
+    'Required attribution for distributions that include or use Salamander samples:',
+    '  "Salamander Grand Piano v3 by Alexander Holm, licensed under CC BY 3.0',
+    '   (https://creativecommons.org/licenses/by/3.0/), source: https://archive.org/details/SalamanderGrandPianoV3"',
+    '',
+    'If you modify the third-party samples, indicate that changes were made.',
+    '',
+    'This notice is not legal advice. Verify license obligations for any additional assets you add.'
+  ].join('\n')
+
+  try {
+    const { canceled, filePath } = await dialog.showSaveDialog(mainWindow, {
+      title: 'Export License',
+      defaultPath: 'audio-license-and-attribution.txt',
+      filters: [{ name: 'Text', extensions: ['txt'] }]
+    })
+
+    if (canceled || !filePath) return false
+
+    await writeFile(filePath, content, 'utf8')
+    return true
+  } catch (error) {
+    console.error('Failed to export CC0 license', error)
+    return false
+  }
+}
+
 function createWindow(): void {
   mainWindow = new BrowserWindow({
     width: 1280,
@@ -148,6 +192,7 @@ app.whenReady().then(() => {
   ipcMain.handle('project:open', async () => openProjectFile())
   ipcMain.handle('project:save', async (_event, song: Song) => saveProjectFile(song))
   ipcMain.handle('project:export-audio', async (_event, payload: unknown) => exportAudioFile(payload))
+  ipcMain.handle('project:export-cc0-license', async () => exportCc0LicenseFile())
 
   createWindow()
 
