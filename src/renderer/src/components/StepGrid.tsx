@@ -1311,7 +1311,7 @@ export default function StepGrid({ currentStep, onStopPlayback, onRestartPlaybac
                 </div>
 
                 <div className="piano-roll-shell">
-                  <div className="pitch-labels" style={{ gridTemplateRows: `repeat(${visiblePitches.length}, 20px)` }}>
+                  <div className="pitch-labels" style={{ gridTemplateRows: `repeat(${visiblePitches.length}, var(--roll-cell-h, 20px))` }}>
                     {visiblePitches.map((pitch) => (
                       <div key={`pitch-${track.id}-${pitch}`} className={`pitch-label${pitch % 12 === 0 ? ' c-note' : ''}`}>
                         {midiLabel(pitch)}
@@ -1322,8 +1322,8 @@ export default function StepGrid({ currentStep, onStopPlayback, onRestartPlaybac
                   <div
                     className="piano-roll-grid"
                     style={{
-                      gridTemplateColumns: `repeat(${song.stepCount}, 22px)`,
-                      gridTemplateRows: `repeat(${visiblePitches.length}, 20px)`
+                      gridTemplateColumns: `repeat(${song.stepCount}, var(--roll-cell-w, 22px))`,
+                      gridTemplateRows: `repeat(${visiblePitches.length}, var(--roll-cell-h, 20px))`
                     }}
                   >
                     {visiblePitches.map((pitch) =>

@@ -956,10 +956,13 @@ body {
 }
 
 .piano-roll-shell {
+  --roll-cell-w: 22px;
+  --roll-cell-h: 20px;
   display: flex;
   align-items: flex-start;
   gap: 0.25rem;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pitch-labels {
@@ -970,7 +973,7 @@ body {
 }
 
 .pitch-label {
-  height: 20px;
+  height: var(--roll-cell-h, 20px);
   border: 1px solid #222;
   border-right: none;
   background: #151515;
@@ -994,8 +997,8 @@ body {
 }
 
 .roll-cell {
-  width: 22px;
-  height: 20px;
+  width: var(--roll-cell-w, 22px);
+  height: var(--roll-cell-h, 20px);
   background: #181818;
   border: 1px solid #252525;
   border-radius: 2px;
@@ -1041,7 +1044,7 @@ body {
 .note-span {
   position: relative;
   z-index: 3;
-  height: 20px;
+  height: var(--roll-cell-h, 20px);
   align-self: center;
   display: flex;
   align-items: stretch;
@@ -1108,6 +1111,7 @@ body {
   letter-spacing: 0.03em;
 }
 
+/* ── Responsive: ≤ 1200px (small desktop / landscape tablet) ── */
 @media (max-width: 1200px) {
   .onboarding-panel {
     flex-direction: column;
@@ -1127,7 +1131,42 @@ body {
   }
 }
 
+/* ── Responsive: ≤ 900px (tablet portrait) ────────────────── */
 @media (max-width: 900px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .app-title {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .status-badge {
+    margin-left: 0;
+    text-align: center;
+    min-width: 0;
+  }
+
+  .transport {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .file-controls {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: center;
+  }
+
+  .app-main {
+    padding: 0.75rem;
+  }
+
   .generation-summary-panel {
     flex-direction: column;
     align-items: flex-start;
@@ -1174,5 +1213,612 @@ body {
     padding: 1rem;
     overflow-y: auto;
     background: #090d0b;
+  }
+
+  .roll-toolbar {
+    gap: 0.45rem;
+    padding: 0.5rem;
+  }
+
+  .toolbar-toggle {
+    min-width: 0;
+    flex: 1 1 calc(50% - 0.3rem);
+  }
+
+  .bpm-picker {
+    flex-wrap: wrap;
+  }
+}
+
+/* ── Responsive: ≤ 640px (large phones / small tablets) ───── */
+@media (max-width: 640px) {
+  body {
+    overflow: auto;
+  }
+
+  .app-main {
+    padding: 0.5rem;
+  }
+
+  .roll-toolbar {
+    gap: 0.4rem;
+    padding: 0.45rem;
+  }
+
+  .roll-toolbar label {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: 0;
+  }
+
+  .roll-toolbar select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .roll-toolbar-checkbox-row {
+    gap: 0.4rem;
+  }
+
+  .toolbar-toggle {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .roll-toolbar-timing-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.45rem;
+  }
+
+  .bpm-picker {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .bpm-input-row {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bpm-preset-row {
+    width: 100%;
+  }
+
+  .pitch-shift-label {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .secondary-btn {
+    min-width: 3.2rem;
+    height: 2.5rem;
+    padding: 0 0.6rem;
+    font-size: 0.68rem;
+  }
+
+  .secondary-select {
+    height: 2.5rem;
+    min-width: 3.8rem;
+    font-size: 0.68rem;
+  }
+
+  .transport-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .onboarding-panel {
+    padding: 0.7rem;
+    gap: 0.6rem;
+  }
+
+  .onboarding-pills {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .onboarding-pill {
+    font-size: 0.64rem;
+    text-align: center;
+  }
+
+  .empty-state-card {
+    padding: 0.8rem;
+  }
+
+  .empty-state-shortcuts {
+    justify-content: center;
+  }
+
+  .note-length-options {
+    gap: 0.3rem;
+  }
+
+  .note-option {
+    flex: 1 1 auto;
+    min-width: 2.8rem;
+    font-size: 0.62rem;
+    padding: 0 0.35rem;
+  }
+
+  .track-controls {
+    flex-wrap: wrap;
+  }
+
+  .track-mixer-row {
+    gap: 0.4rem;
+    padding: 0.4rem;
+  }
+
+  .track-mixer-row .track-controls {
+    width: 100%;
+  }
+
+  .track-mixer-row .track-controls select {
+    flex: 1;
+  }
+
+  .track-volume {
+    flex: 1;
+    min-width: 60px;
+  }
+
+  .generation-summary-actions {
+    gap: 0.4rem;
+  }
+
+  .manual-editor-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .manual-editor-toolbar label {
+    justify-content: space-between;
+  }
+
+  .manual-editor-toolbar select {
+    flex: 1;
+  }
+
+  .piano-roll-shell {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sample-warning-panel {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .sample-warning-copy {
+    font-size: 0.68rem;
+  }
+}
+
+/* ── Responsive: ≤ 480px (phones) ─────────────────────────── */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.4rem 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .app-title {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+  }
+
+  .file-controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .secondary-btn {
+    min-width: 0;
+    width: 100%;
+    height: 2.4rem;
+    font-size: 0.63rem;
+    padding: 0 0.3rem;
+  }
+
+  .secondary-select {
+    min-width: 0;
+    width: 100%;
+    height: 2.4rem;
+    font-size: 0.63rem;
+  }
+
+  .transport {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .transport-btn {
+    width: 100%;
+    height: 2.8rem;
+    font-size: 1.1rem;
+  }
+
+  .transport > .secondary-btn {
+    width: 100%;
+  }
+
+  .roll-toolbar label {
+    flex: 1 1 100%;
+  }
+
+  .roll-toolbar label select {
+    flex: 1;
+  }
+
+  .bpm-nudge {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+
+  .bpm-nudge.bpm-nudge-med {
+    width: auto;
+  }
+
+  .bpm-nudge.bpm-nudge-big {
+    width: auto;
+  }
+
+  .bpm-input {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+
+  .bpm-lock-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .bpm-preset-btn {
+    font-size: 0.6rem;
+  }
+
+  .generation-summary-copy {
+    font-size: 0.66rem;
+  }
+
+  .onboarding-title {
+    font-size: 0.88rem;
+  }
+
+  .empty-state-title {
+    font-size: 0.88rem;
+  }
+
+  .empty-state-copy {
+    font-size: 0.74rem;
+  }
+
+  .track-name {
+    font-size: 0.72rem;
+  }
+
+  .track-instrument {
+    font-size: 0.58rem;
+  }
+
+  .track-info {
+    gap: 0.3rem;
+  }
+
+  .adsr-controls {
+    flex-wrap: wrap;
+  }
+
+  .track-editor-field.envelope {
+    flex: 1 1 calc(50% - 0.2rem);
+    min-width: 3.5rem;
+  }
+
+  .manual-editor-panel {
+    padding: 0.6rem;
+  }
+
+  .note-action-panel {
+    padding: 0.4rem;
+  }
+
+  .note-option {
+    height: 2rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .pitch-labels {
+    width: 40px;
+    font-size: 0.5rem;
+  }
+
+  .pitch-label {
+    font-size: 0.5rem;
+    padding-right: 0.25rem;
+  }
+
+  .piano-roll-shell {
+    --roll-cell-w: 18px;
+    --roll-cell-h: 18px;
+  }
+
+  .roll-cell {
+    width: var(--roll-cell-w);
+    height: var(--roll-cell-h);
+  }
+
+  .note-span {
+    height: var(--roll-cell-h);
+  }
+
+  .piano-roll-grid {
+    gap: 1px;
+  }
+}
+
+/* ── Responsive: ≤ 375px (iPhone SE and smallest phones) ──── */
+@media (max-width: 375px) {
+  .app-header {
+    padding: 0.3rem 0.4rem;
+    gap: 0.25rem;
+  }
+
+  .app-title {
+    font-size: 0.8rem;
+  }
+
+  .app-main {
+    padding: 0.35rem;
+  }
+
+  .file-controls {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2rem;
+  }
+
+  .secondary-btn {
+    height: 2.2rem;
+    font-size: 0.58rem;
+    padding: 0 0.2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .secondary-select {
+    height: 2.2rem;
+    font-size: 0.58rem;
+  }
+
+  .roll-toolbar {
+    padding: 0.35rem;
+    gap: 0.3rem;
+    border-radius: 6px;
+  }
+
+  .roll-toolbar span {
+    font-size: 0.56rem;
+  }
+
+  .roll-toolbar select {
+    height: 1.8rem;
+    font-size: 0.64rem;
+  }
+
+  .toolbar-toggle {
+    padding: 0.25rem 0.35rem;
+    column-gap: 0.3rem;
+  }
+
+  .toolbar-toggle small {
+    font-size: 0.52rem;
+  }
+
+  .bpm-nudge {
+    height: 1.7rem;
+    font-size: 0.85rem;
+  }
+
+  .bpm-nudge.bpm-nudge-med {
+    font-size: 0.62rem;
+  }
+
+  .bpm-nudge.bpm-nudge-big {
+    font-size: 0.58rem;
+  }
+
+  .bpm-input {
+    height: 1.7rem;
+    font-size: 0.78rem;
+  }
+
+  .bpm-preset-btn {
+    height: 1.5rem;
+    font-size: 0.55rem;
+  }
+
+  .bpm-lock-btn {
+    height: 1.7rem;
+    font-size: 0.56rem;
+  }
+
+  .generation-summary-panel {
+    padding: 0.45rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .generation-summary-copy {
+    font-size: 0.6rem;
+  }
+
+  .generate-main-btn {
+    height: 2.5rem;
+    font-size: 0.72rem;
+  }
+
+  .track-mixer-panel {
+    padding: 0.4rem;
+    gap: 0.3rem;
+  }
+
+  .track-mixer-row {
+    padding: 0.3rem;
+  }
+
+  .track-name {
+    font-size: 0.66rem;
+  }
+
+  .track-toggle {
+    width: 26px;
+    height: 22px;
+    font-size: 0.62rem;
+  }
+
+  .onboarding-panel {
+    padding: 0.5rem;
+    gap: 0.4rem;
+    border-radius: 8px;
+  }
+
+  .onboarding-eyebrow {
+    font-size: 0.58rem;
+  }
+
+  .onboarding-title {
+    font-size: 0.82rem;
+  }
+
+  .onboarding-pill {
+    font-size: 0.58rem;
+    padding: 0.25rem 0.4rem;
+  }
+
+  .dismiss-onboarding {
+    height: 1.8rem;
+    font-size: 0.62rem;
+    padding: 0 0.6rem;
+  }
+
+  .empty-state-card {
+    padding: 0.6rem;
+  }
+
+  .empty-state-title {
+    font-size: 0.78rem;
+  }
+
+  .empty-state-copy {
+    font-size: 0.68rem;
+  }
+
+  .empty-state-shortcuts span {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.35rem;
+  }
+
+  .note-action-head span {
+    font-size: 0.56rem;
+  }
+
+  .note-action-head strong {
+    font-size: 0.66rem;
+  }
+
+  .note-length-options {
+    gap: 0.2rem;
+  }
+
+  .note-option {
+    height: 1.8rem;
+    font-size: 0.56rem;
+  }
+
+  .note-action-copy {
+    font-size: 0.6rem;
+  }
+
+  .pitch-labels {
+    width: 34px;
+  }
+
+  .pitch-label {
+    font-size: 0.46rem;
+    padding-right: 0.15rem;
+  }
+
+  .piano-roll-shell {
+    --roll-cell-w: 16px;
+    --roll-cell-h: 16px;
+  }
+
+  .roll-cell {
+    width: var(--roll-cell-w);
+    height: var(--roll-cell-h);
+  }
+
+  .note-span {
+    height: var(--roll-cell-h);
+  }
+
+  .note-body {
+    font-size: 0.48rem;
+  }
+
+  .note-handle {
+    width: 8px;
+  }
+
+  .manual-editor-panel {
+    padding: 0.4rem;
+  }
+
+  .manual-editor-toolbar span {
+    font-size: 0.56rem;
+  }
+
+  .manual-editor-toolbar select {
+    height: 1.8rem;
+    font-size: 0.64rem;
+  }
+
+  .track-heading {
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+
+  .track-remove-btn {
+    font-size: 0.52rem;
+    padding: 0 0.3rem;
+  }
+
+  .track-controls select {
+    min-width: 4.5rem;
+    font-size: 0.62rem;
+  }
+
+  .roll-hint {
+    font-size: 0.6rem;
+  }
+
+  .status-badge {
+    font-size: 0.62rem;
+    min-width: 0;
+  }
+
+  .sample-warning-panel {
+    padding: 0.45rem 0.55rem;
+  }
+
+  .sample-warning-title {
+    font-size: 0.66rem;
+  }
+
+  .sample-warning-copy {
+    font-size: 0.6rem;
   }
 }
