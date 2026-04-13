@@ -83,10 +83,35 @@ export default function App(): React.JSX.Element {
   const [showOnboarding, setShowOnboarding] = React.useState(true)
   const [missingSamplePaths, setMissingSamplePaths] = React.useState<string[]>([])
 
+  const generateTheorySong = useProjectStore((state) => state.generateTheorySong)
+
   const hasNotes = React.useMemo(
     () => Object.values(song.grid).some((row) => row.some((cell) => cell !== null)),
     [song.grid]
   )
+
+  const handlePlayStop = React.useCallback((): void => {
+    if (isPlaying) {
+      toggle()
+      return
+    }
+    if (!hasNotes) {
+      generateTheorySong({
+        style: 'chiptune',
+        substyle: 'random',
+        songForm: 'random',
+        chordStructure: 'random',
+        key: 'random',
+        variation: 'normal',
+        mood: 'random',
+        preset: 'balanced',
+        repeatReady: false,
+        loopStyle: 'strong-cadence',
+        instrumentCount: song.tracks.length
+      })
+    }
+    toggle()
+  }, [isPlaying, hasNotes, toggle, generateTheorySong, song.tracks.length])
 
   const handleNewProject = React.useCallback(async (): Promise<void> => {
     stop()
@@ -216,13 +241,13 @@ export default function App(): React.JSX.Element {
 
       if (event.code === 'Space') {
         event.preventDefault()
-        toggle()
+        handlePlayStop()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [handleExportAudio, handleNewProject, handleOpenProject, handleSaveProject, redo, toggle, undo])
+  }, [handleExportAudio, handleNewProject, handleOpenProject, handleSaveProject, redo, handlePlayStop, undo])
 
   return (
     <div className="app">
@@ -230,7 +255,7 @@ export default function App(): React.JSX.Element {
         <span className="app-title">8bMzMKR</span>
         <Transport
           isPlaying={isPlaying}
-          onPlayStop={toggle}
+          onPlayStop={handlePlayStop}
           onPreviewLoop={previewLoopSeam}
           onNewProject={handleNewProject}
           onOpenProject={handleOpenProject}
@@ -272,7 +297,9 @@ export default function App(): React.JSX.Element {
               <span className="onboarding-pill">Use M/S/Volume to balance tracks before editing</span>
               <span className="onboarding-pill">Open Manual Editor only when you want note-level changes</span>
               <span className="onboarding-pill">Space starts and stops playback</span>
+              <span className="onboarding-pill">Pressing Play on an empty pattern auto-generates a random song</span>
               {!isElectron && <span className="onboarding-pill">Web version: only WAV export is supported</span>}
+              <span className="onboarding-pill">On mobile, audio may not play if your phone is set to silent — switch off silent/mute mode</span>
             </div>
             <button className="dismiss-onboarding" onClick={() => setShowOnboarding(false)}>
               Hide tips
